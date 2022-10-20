@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/exp02/tourist_data.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/exp02/ug_detect.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/exp03/alarm.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/exp03/model.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/exp04/alarm.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/exp04/model.csv" charset="GBK" />
+  </component>
+</project>

@@ -35,3 +35,4 @@ plt.scatter(value[:, 0], value[:, 4], marker='s', c='y')
 plt.scatter(value[:, 0], value[:, 5], marker='*', c='c')
 plt.legend(['年末总人口', '男性人口', '女性人口', '城镇人口', '乡村人口'])
 plt.show()
+

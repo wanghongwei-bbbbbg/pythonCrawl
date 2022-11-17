@@ -4,35 +4,53 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# 实训1 分析1996~2015年人口数据特征间的关系
+# 使用numpy库读取人口数据
 data = np.load('populations.npz', allow_pickle=True)
-plt.rcParams['font.sans-serif'] = 'SimHei'
-plt.rcParams['axes.unicode_minus'] = False
+print(data.files)  # 查看文件中的数组
+print(data['data'])
+print(data['feature_names'])
 
+plt.rcParams['font.sans-serif'] = 'SimHei'  # 设置中文显示
+name = data['feature_names']  # 提取其中的feature_names数组，视为数据的标签
+values = data['data']  # 提取其中的data数组，视为数据的存在位置
 
-def getKeys(data):
-    ks = []
-    for key in data.keys():
-        ks.append(key)
-    return ks
+p1 = plt.figure(figsize=(12, 12))  # 确定画布大小
+pip1 = p1.add_subplot(2, 1, 1)  # 创建一个两行一列的子图并开始绘制
+# 在子图上绘制散点图
+plt.scatter(values[0:20, 0], values[0:20, 1], marker='8', color='red')
+plt.ylabel('总人口（万人）')
+plt.legend('年末')
+plt.title('1996~2015年末与各类人口散点图')
 
+pip2 = p1.add_subplot(2, 1, 2)  # 绘制子图2
+plt.scatter(values[0:20, 0], values[0:20, 2], marker='o', color='yellow')
+plt.scatter(values[0:20, 0], values[0:20, 3], marker='D', color='green')
+plt.scatter(values[0:20, 0], values[0:20, 4], marker='p', color='blue')
+plt.scatter(values[0:20, 0], values[0:20, 5], marker='s', color='purple')
+plt.xlabel('时间')
+plt.ylabel('总人口（万人）')
+plt.xticks(values[0:20, 0])
+plt.legend(['男性', '女性', '城镇', '乡村'])
 
-keys = getKeys(data)
+# 在子图上绘制折线图
+p2 = plt.figure(figsize=(12, 12))
+p1 = p2.add_subplot(2, 1, 1)
+plt.plot(values[0:20, 0], values[0:20, 1], color='r', linestyle='--', marker='8')
+plt.ylabel('总人口（万人）')
+plt.xticks(range(0, 20, 1), values[range(0, 20, 1), 0], rotation=45)  # rotation设置倾斜度
+plt.legend('年末')
+plt.title('1996~2015年末总与各类人口折线图')
 
-value = data[keys[0]][-3::-1, :]  # start:end:step,逗号用于区分维度.这里是获取所有列中倒数第三行到倒数第一行，逆序
-name = data[keys[1]]
-print(keys, value, name)
-p1 = plt.figure(figsize=(14, 7))  # figsize – 宽度、高度（以英寸为单位）
-# 子图1 散点图
-ax1 = p1.add_subplot(1, 2, 1)
-plt.title('1996~2015年人口数据特征间的关系散点图')
-plt.xlabel('年份')
-plt.ylabel('人口数（万人')
-plt.xticks(range(0, 20), value[:, 0], )
-plt.scatter(value[:, 0], value[:, 1], marker='o', c='r')
-plt.scatter(value[:, 0], value[:, 2], marker='D', c='b')
-plt.scatter(value[:, 0], value[:, 3], marker='h', c='g')
-plt.scatter(value[:, 0], value[:, 4], marker='s', c='y')
-plt.scatter(value[:, 0], value[:, 5], marker='*', c='c')
-plt.legend(['年末总人口', '男性人口', '女性人口', '城镇人口', '乡村人口'])
+p2 = p2.add_subplot(2, 1, 2)
+plt.plot(values[0:20, 0], values[0:20, 2], 'y-')
+plt.plot(values[0:20, 0], values[0:20, 3], 'g-.')
+plt.plot(values[0:20, 0], values[0:20, 4], 'b-')
+plt.plot(values[0:20, 0], values[0:20, 5], 'p-')
+plt.xlabel('时间')
+plt.ylabel('总人口（万人）')
+plt.xticks(values[0:20, 0])
+plt.legend(['男性', '女性', '城镇', '乡村'])
+
+# 显示图片
 plt.show()
-
